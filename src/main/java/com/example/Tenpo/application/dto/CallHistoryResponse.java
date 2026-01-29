@@ -1,5 +1,6 @@
 package com.example.Tenpo.application.dto;
 
+import com.example.Tenpo.domain.model.CallHistory;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,4 +33,15 @@ public class CallHistoryResponse {
 
     @Schema(description = "Error si la llamada falló")
     private String error;
+
+    public static CallHistoryResponse fromDomain(CallHistory callHistory) {
+        return CallHistoryResponse.builder()
+                .id(callHistory.getId())
+                .timestamp(callHistory.getTimestamp())
+                .endpoint(callHistory.getEndpoint())
+                .parameters(callHistory.getParameters())
+                .response(callHistory.getResponse())
+                .error(callHistory.getError())
+                .build();
+    }
 }

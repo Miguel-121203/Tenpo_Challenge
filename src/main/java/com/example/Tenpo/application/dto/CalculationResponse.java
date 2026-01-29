@@ -1,5 +1,6 @@
 package com.example.Tenpo.application.dto;
 
+import com.example.Tenpo.domain.model.Calculation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -22,4 +23,12 @@ public class CalculationResponse {
 
     @Schema(description = "Suma sin porcentaje", example = "10")
     private Double originalSum;
+
+    public static CalculationResponse fromDomain(Calculation calculation) {
+        return CalculationResponse.builder()
+                .result(calculation.getResult())
+                .percentage(calculation.getPercentage())
+                .originalSum(calculation.getSum())
+                .build();
+    }
 }
