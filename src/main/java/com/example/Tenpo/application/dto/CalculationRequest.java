@@ -1,4 +1,4 @@
-package com.example.Tenpo.model.dto;
+package com.example.Tenpo.application.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;

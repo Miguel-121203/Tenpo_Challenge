@@ -1,4 +1,4 @@
-package com.example.Tenpo.model.dto;
+package com.example.Tenpo.application.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "Registro del historial de llamadas")
-public class CallHistoryResponse {
+public class ErrorResponse {
 
     @Schema(description = "ID del registro")
     private Long id;
@@ -33,3 +33,4 @@ public class CallHistoryResponse {
     @Schema(description = "Error si la llamada falló")
     private String error;
 }
+

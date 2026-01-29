@@ -1,4 +1,4 @@
-package com.example.Tenpo.model.entity;
+package com.example.Tenpo.infraestructure.output.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
