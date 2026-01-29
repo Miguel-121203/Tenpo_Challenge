@@ -19,6 +19,7 @@ spring:
   cache:
     type: caffeine
 
+
 server:
   port: 8080
 
@@ -26,3 +27,13 @@ external:
   percentage:
     value: 5
     failture-rate: 0.3
+
+cache:
+  percentage:
+    ttl-minutes: 30
+
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method

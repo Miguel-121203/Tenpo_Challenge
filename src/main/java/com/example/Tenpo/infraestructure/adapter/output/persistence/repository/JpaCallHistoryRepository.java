@@ -1,6 +1,6 @@
-package com.example.Tenpo.infraestructure.output.persistence.repository;
+package com.example.Tenpo.infraestructure.adapter.output.persistence.repository;
 
-import com.example.Tenpo.infraestructure.output.persistence.entity.CallHistory;
+import com.example.Tenpo.infraestructure.adapter.output.persistence.entity.CallHistory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

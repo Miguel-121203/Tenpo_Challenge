@@ -1,4 +1,4 @@
-package com.example.Tenpo.infraestructure.output.external;
+package com.example.Tenpo.infraestructure.adapter.output.external;
 
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
