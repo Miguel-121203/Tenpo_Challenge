@@ -1,0 +1,45 @@
+services:
+  app:
+    build: .
+    container_name: tenpo-api
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: tenpo
+      DB_USER: tenpo
+      DB_PASSWORD: tenpo123
+    networks:
+      - tenpo-network
+    restart: unless-stopped
+
+  db:
+    image: postgres:16-alpine
+    container_name: tenpo-db
+    environment:
+      POSTGRES_DB: tenpo
+      POSTGRES_USER: tenpo
+      POSTGRES_PASSWORD: tenpo123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - tenpo-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tenpo -d tenpo"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+networks:
+  tenpo-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
