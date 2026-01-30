@@ -1,6 +1,8 @@
 package com.example.Tenpo.infraestructure.adapter.input.rest;
 
 import com.example.Tenpo.application.dto.CallHistoryResponse;
+import com.example.Tenpo.application.dto.PageResponse;
+import com.example.Tenpo.domain.model.CallHistory;
 import com.example.Tenpo.domain.port.input.CallHistoryUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -27,14 +31,27 @@ public class HistoryController {
     @Operation(summary = "Obtener historial de llamadas",
             description = "Devuelve el historial de llamadas paginado, ordenado por fecha descendente")
     @ApiResponse(responseCode = "200", description = "Historial obtenido exitosamente")
-    public ResponseEntity<Page<CallHistoryResponse>> getHistory(
+    public ResponseEntity<PageResponse<CallHistoryResponse>> getHistory(
             @Parameter(description = "Numero de pagina (0-indexed)")
             @RequestParam(defaultValue = "0") int page,
             @Parameter(description = "tamaño de pagina")
             @RequestParam(defaultValue = "10") int size) {
 
-        Page<CallHistoryResponse> historyResponses = callHistoryUseCase.getHistory(PageRequest.of(page, size))
-                .map(CallHistoryResponse::fromDomain);
-        return ResponseEntity.ok(historyResponses);
+        Page<CallHistory> historyPage = callHistoryUseCase.getHistory(PageRequest.of(page, size));
+
+        List<CallHistoryResponse> content = historyPage.getContent()
+                .stream()
+                .map(CallHistoryResponse::fromDomain)
+                .toList();
+
+        PageResponse<CallHistoryResponse> response = PageResponse.<CallHistoryResponse>builder()
+                .content(content)
+                .page(historyPage.getNumber())
+                .size(historyPage.getSize())
+                .totalElements(historyPage.getTotalElements())
+                .totalPages(historyPage.getTotalPages())
+                .build();
+
+        return ResponseEntity.ok(response);
     }
 }

@@ -12,25 +12,19 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Registro del historial de llamadas")
+@Schema(description = "Respuesta de error")
 public class ErrorResponse {
 
-    @Schema(description = "ID del registro")
-    private Long id;
+    @Schema(description = "Código de estado HTTP")
+    private int status;
 
-    @Schema(description = "Fecha y hora de la llamada")
+    @Schema(description = "Mensaje de error")
+    private String message;
+
+    @Schema(description = "Fecha y hora del error")
     private LocalDateTime timestamp;
 
-    @Schema(description = "Endpoint invocado")
-    private String endpoint;
-
-    @Schema(description = "Parámetros de la llamada en formato JSON")
-    private String parameters;
-
-    @Schema(description = "Respuesta de la llamada en formato JSON")
-    private String response;
-
-    @Schema(description = "Error si la llamada falló")
-    private String error;
+    @Schema(description = "Ruta que generó el error")
+    private String path;
 }
 

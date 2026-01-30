@@ -26,7 +26,7 @@ server:
 external:
   percentage:
     value: 5
-    failture-rate: 0.3
+    failure-rate: 0.3
 
 cache:
   percentage:

@@ -41,15 +41,19 @@ public class CalculationController {
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
     public ResponseEntity<CalculationResponse> calculate(@Valid @RequestBody CalculationRequest request){
+        CalculationResponse response = null;
+        String error = null;
 
         try{
-            Calculation calculation = calculationUseCase.calculate(request.getNum1(),  request.getNum2());
-            CalculationResponse response = CalculationResponse.fromDomain(calculation);
-            callHistoryUseCase.recordCall(ENDPOINT,request,response,null);
+            Calculation calculation = calculationUseCase.calculate(request.getNum1(), request.getNum2());
+            response = CalculationResponse.fromDomain(calculation);
             return ResponseEntity.ok(response);
-        }catch (Exception e){
-            callHistoryUseCase.recordCall(ENDPOINT,request,null,e.getMessage());
+        }catch (Exception e) {
+            error = e.getMessage();
             throw e;
+        } finally {
+            callHistoryUseCase.recordCall(ENDPOINT, request, response, error);
         }
+
     }
 }
