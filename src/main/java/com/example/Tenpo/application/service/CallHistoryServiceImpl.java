@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import static com.example.Tenpo.application.constants.LogMessages.*;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -32,9 +34,9 @@ public class CallHistoryServiceImpl implements CallHistoryUseCase {
                     error
             );
             callHistoryRepositoryPort.save(callHistory);
-            log.info("Llamada registrada en el historial: {}", callHistory.toString());
+            log.info(HISTORY_RECORDED, callHistory.toString());
         }catch (Exception e){
-            log.error("Error al registrar llamada en historial",e);
+            log.error(HISTORY_ERROR, e);
         }
     }
 
@@ -51,7 +53,7 @@ public class CallHistoryServiceImpl implements CallHistoryUseCase {
         try {
             return objectMapper.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
-            log.warn("Error al serializar objeto a JSON", e);
+            log.warn(HISTORY_JSON_ERROR, e);
             return obj.toString();
         }
     }

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.Random;
 
+import static com.example.Tenpo.application.constants.LogMessages.*;
+
 @Slf4j
 @Component
 public class ExternalPercentageAdapter implements PercentageProviderPort {
@@ -25,16 +27,16 @@ public class ExternalPercentageAdapter implements PercentageProviderPort {
 
     @Override
     public Double getPercentage() {
-        log.info("Llamando al servicio externo para obtener porcentaje");
+        log.info(EXTERNAL_CALLING);
 
         simulateNetworkDelay();
 
         if (shouldFail()){
-            log.warn("Servicio externo fallo (Simulacion)");
+            log.warn(EXTERNAL_FAILED);
             throw new ExternalServiceException("Servicio externo no esta disponible");
         }
 
-        log.info("Servicio externo respondio con porcentaje {}", percentageValue);
+        log.info(EXTERNAL_SUCCESS, percentageValue);
         return percentageValue;
     }
 

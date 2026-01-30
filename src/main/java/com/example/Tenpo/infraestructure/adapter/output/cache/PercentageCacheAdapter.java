@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+import static com.example.Tenpo.application.constants.LogMessages.*;
+
 @Slf4j
 @Component
 @RequiredArgsConstructor
@@ -25,11 +27,11 @@ public class PercentageCacheAdapter implements PercentageCachePort {
         if (cache != null) {
             Double value = cache.get(CACHE_KEY, Double.class);
             if (value != null) {
-                log.info("Valor encontrado en cache: {}",value);
+                log.info(CACHE_HIT, value);
                 return Optional.of(value);
             }
         }
-        log.info("No se encontro el valor del cache");
+        log.info(CACHE_MISS);
         return Optional.empty();
     }
 
@@ -38,7 +40,7 @@ public class PercentageCacheAdapter implements PercentageCachePort {
         Cache cache = cacheManager.getCache(CACHE_NAME);
         if (cache != null) {
             cache.put(CACHE_KEY, percentage);
-            log.info("Valor guardado en cache: {}",percentage);
+            log.info(CACHE_SAVED, percentage);
         }
 
     }

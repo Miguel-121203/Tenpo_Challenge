@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import static com.example.Tenpo.application.constants.LogMessages.*;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -20,10 +22,10 @@ public class PercentageService {
         try{
             Double percentage = percentageProvider.getPercentage();
             percentageCache.save(percentage);
-            log.info("Porcentaje obtenido del servicio externo {}", percentage);
+            log.info(PERCENTAGE_FROM_EXTERNAL, percentage);
             return percentage;
         }catch (ExternalServiceException e){
-            log.warn("Error al obtener porcentaje del servicio externo, intentando usar cache");
+            log.warn(PERCENTAGE_EXTERNAL_FAILED);
             return getFromCacheOrThrow();
         }
     }
@@ -32,7 +34,7 @@ public class PercentageService {
     private Double getFromCacheOrThrow(){
         return percentageCache.get()
                 .map(value ->{
-                    log.info("Porcentaje obtenido de cache {}", value);
+                    log.info(PERCENTAGE_FROM_CACHE, value);
                     return value;
                 })
                 .orElseThrow( () -> new PercentageNotAvailableException(

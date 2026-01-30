@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import static com.example.Tenpo.application.constants.LogMessages.*;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -15,12 +17,12 @@ public class CalculationServiceImpl implements CalculationUseCase {
 
     @Override
     public Calculation calculate(Double num1, Double num2) {
-        log.info("Calculando suma de {} + {}", num1, num2);
+        log.info(CALC_STARTING, num1, num2);
 
         Double percentage = percentageService.getPercentage();
         Calculation calculation = Calculation.create(num1, num2, percentage);
 
-        log.info("Resaultado: {} + {}% = {} ", calculation.getSum(), percentage, calculation.getResult());
+        log.info(CALC_RESULT, calculation.getSum(), percentage, calculation.getResult());
 
         return calculation;
     }

@@ -1,3 +1,4 @@
+server.port: 8080
 spring:
   application:
     name: Tenpo
@@ -7,7 +8,6 @@ spring:
     username: ${DB_USER}
     password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
-
   jpa:
     hibernate:
       ddl-auto: update
@@ -15,25 +15,12 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+  cache.type: caffeine
 
-  cache:
-    type: caffeine
-
-
-server:
-  port: 8080
-
-external:
-  percentage:
+external.percentage:
     value: 5
     failure-rate: 0.3
-
-cache:
-  percentage:
-    ttl-minutes: 30
-
-
-springdoc:
-  swagger-ui:
+cache.percentage.ttl-minutes: 30
+springdoc.swagger-ui:
     path: /swagger-ui.html
     operations-sorter: method
