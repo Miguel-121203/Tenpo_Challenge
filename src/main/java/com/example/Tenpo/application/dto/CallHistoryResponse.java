@@ -1,6 +1,7 @@
 package com.example.Tenpo.application.dto;
 
 import com.example.Tenpo.domain.model.CallHistory;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "Registro del historial de llamadas")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CallHistoryResponse {
 
     @Schema(description = "ID del registro")

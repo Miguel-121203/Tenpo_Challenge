@@ -32,7 +32,7 @@ public class CallHistoryServiceImpl implements CallHistoryUseCase {
                     error
             );
             callHistoryRepositoryPort.save(callHistory);
-            log.info("Llamada registrada en el historial: {}", callHistory);
+            log.info("Llamada registrada en el historial: {}", callHistory.toString());
         }catch (Exception e){
             log.error("Error al registrar llamada en historial",e);
         }

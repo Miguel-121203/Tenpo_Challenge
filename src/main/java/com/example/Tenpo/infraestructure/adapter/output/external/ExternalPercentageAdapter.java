@@ -16,7 +16,7 @@ public class ExternalPercentageAdapter implements PercentageProviderPort {
     private final Random random;
 
     public ExternalPercentageAdapter(
-            @org.springframework.beans.factory.annotation.Value("${external.percentage.value}") double percentageValue,
+            @Value("${external.percentage.value}") double percentageValue,
             @Value("${external.percentage.failure-rate}") double failureRate) {
         this.percentageValue = percentageValue;
         this.failureRate = failureRate;

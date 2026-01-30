@@ -2,7 +2,6 @@ package com.example.Tenpo.application.service;
 
 import com.example.Tenpo.domain.model.Calculation;
 import com.example.Tenpo.domain.port.input.CalculationUseCase;
-import com.example.Tenpo.domain.port.input.CallHistoryUseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
